@@ -1,0 +1,99 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "build:custom-lint": "tsc --project settings/rules/tsconfig.json",
+    "dev": "nuxt dev -o",
+    "test": "vitest",
+    "test:ui": "vitest --ui --coverage",
+    "test:coverage": "vitest --coverage",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "lint:rules": "npx @eslint/config-inspector@latest",
+    "format:check": "prettier . --check",
+    "format:fix": "prettier . --write",
+    "lint-and-format": "pnpm run lint:fix && pnpm run format:fix",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "convert": "npx vite-node settings/data/convert.ts",
+    "ci:typecheck": "npx nuxi typecheck .",
+    "ci:test": "vitest",
+    "ci:lint": "eslint .",
+    "ci:format": "prettier --check .",
+    "predev": "pnpm run convert",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@pinia/nuxt": "^0.5.5",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "lucide-vue-next": "^0.379.0",
+    "nuxt": "^3.13.2",
+    "pinia": "^2.2.4",
+    "radix-vue": "^1.9.7",
+    "shadcn-nuxt": "^0.10.4",
+    "tailwind-merge": "^2.5.4",
+    "tailwindcss-animate": "^1.0.7",
+    "vue": "^3.5.12",
+    "vue-router": "^4.4.5"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.5.0",
+    "@nuxt/eslint": "^0.6.0",
+    "@nuxt/test-utils": "^3.14.4",
+    "@nuxtjs/tailwindcss": "^6.12.2",
+    "@pinia/testing": "^0.1.6",
+    "@types/eslint": "^8.56.12",
+    "@types/eslint-config-prettier": "^6.11.3",
+    "@types/estree": "^1.0.6",
+    "@types/node": "^20.17.1",
+    "@typescript-eslint/parser": "^8.11.0",
+    "@vanilla-extract/css": "^1.16.0",
+    "@vanilla-extract/vite-plugin": "^4.0.17",
+    "@vitest/coverage-v8": "^2.1.3",
+    "@vitest/ui": "^2.1.3",
+    "@vue/test-utils": "^2.4.6",
+    "commitizen": "^4.3.1",
+    "commitlint-config-gitmoji": "^2.3.1",
+    "cz-customizable": "^7.2.1",
+    "eslint": "^9.13.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-reactive-value-suffix": "^2.0.0",
+    "glob": "^10.4.5",
+    "globals": "^15.11.0",
+    "happy-dom": "^14.12.3",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "playwright-core": "^1.48.2",
+    "prettier": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.5.14",
+    "typescript": "^5.6.3",
+    "vite-node": "^1.6.0",
+    "vite-plugin-eslint2": "^4.4.2",
+    "vitest": "^2.1.3",
+    "vue-tsc": "^2.1.6"
+  },
+  "lint-staged": {
+    "**/*.{js,ts,vue}": [
+      "pnpm convert",
+      "npx eslint --fix"
+    ],
+    "**/*.{js,ts,vue,json}": "npx prettier --write",
+    "**/*.{ts,vue}": "npx nuxi typecheck ."
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-customizable"
+    },
+    "cz-customizable": {
+      "config": ".cz-config.cts"
+    }
+  },
+  "volta": {
+    "node": "20.15.0",
+    "pnpm": "9.7.0"
+  }
+}
