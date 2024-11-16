@@ -1,10 +1,7 @@
 <script setup lang="ts">
-import HelloWorld from '@/features/sample/components/HelloWorld.vue';
-
-useHead({
-  title: 'ポケモン図鑑',
-});
+await navigateTo('/pokedex');
 </script>
+
 <template>
-  <component :is="HelloWorld" />
+  <div>Redirecting...</div>
 </template>

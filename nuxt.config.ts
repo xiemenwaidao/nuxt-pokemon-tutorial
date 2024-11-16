@@ -15,4 +15,8 @@ export default defineNuxtConfig({
   },
 
   compatibilityDate: '2024-11-16',
+
+  runtimeConfig: {
+    POKE_API: process.env.POKE_API,
+  },
 });
