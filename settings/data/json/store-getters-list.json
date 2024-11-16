@@ -6,5 +6,6 @@
   "getCount5",
   "getCount6",
   "getEnglishPokemonNames",
-  "getJapanesePokemonNames"
+  "getJapanesePokemonNames",
+  "getPokemonImageUrls"
 ]
