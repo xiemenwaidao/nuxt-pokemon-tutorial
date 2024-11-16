@@ -1,10 +1,32 @@
 <script setup lang="ts">
-import { fetchData } from '../api/pokedex';
+import { usePokemonDataStore } from '@/store/pokemonDataStore';
 
-const data = await fetchData();
-// eslint-disable-next-line no-console
-console.log(data);
+const pokemonDataStore = usePokemonDataStore();
+const { loading: loadingState, getEnglishPokemonNames } = storeToRefs(pokemonDataStore);
+const { updateAllPokemonData } = pokemonDataStore;
+
+await updateAllPokemonData();
 </script>
+
 <template>
-  <h1>ポケモンのページ</h1>
+  <h1>ポケモン図鑑アプリ</h1>
+  <ul class="grid grid-cols-4 gap-2 p-4">
+    <template v-for="name in getEnglishPokemonNames" :key="name">
+      <li>
+        <Card>
+          <CardHeader>
+            <CardTitle>{{ name }}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <template v-if="loadingState">
+              <p>読み込み中...</p>
+            </template>
+            <template v-else>
+              <p>ポケモンの情報</p>
+            </template>
+          </CardContent>
+        </Card>
+      </li>
+    </template>
+  </ul>
 </template>
