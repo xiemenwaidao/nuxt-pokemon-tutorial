@@ -2,7 +2,7 @@
 import { usePokemonDataStore } from '@/store/pokemonDataStore';
 
 const pokemonDataStore = usePokemonDataStore();
-const { loading: loadingState, getJapanesePokemonNames } = storeToRefs(pokemonDataStore);
+const { loading: loadingState, getJapanesePokemonNames, getPokemonImageUrls } = storeToRefs(pokemonDataStore);
 const { updateAllPokemonData } = pokemonDataStore;
 
 await updateAllPokemonData();
@@ -11,18 +11,18 @@ await updateAllPokemonData();
 <template>
   <h1>ポケモン図鑑アプリ</h1>
   <ul class="grid grid-cols-4 gap-2 p-4">
-    <template v-for="name in getJapanesePokemonNames" :key="name">
+    <template v-for="(name, index) in getJapanesePokemonNames" :key="name">
       <li>
         <Card>
           <CardHeader>
-            <CardTitle>{{ name }}</CardTitle>
+            <img :src="getPokemonImageUrls[index]" :alt="`${name}の画像`" />
           </CardHeader>
           <CardContent>
             <template v-if="loadingState">
               <p>読み込み中...</p>
             </template>
             <template v-else>
-              <p>ポケモンの情報</p>
+              <CardTitle>{{ name }}</CardTitle>
             </template>
           </CardContent>
         </Card>

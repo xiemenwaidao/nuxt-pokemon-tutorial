@@ -1,3 +1,8 @@
+export interface AllPokemonData extends PokemonResults {
+  detailData: PokemonDetailData;
+  speciesData: PokemonSpeciesData;
+}
+
 export interface PokemonData {
   count: number;
   next?: string;
@@ -12,11 +17,21 @@ export interface PokemonResults {
 
 export interface PokemonDetailData {
   species: Species;
+  sprites: Sprites;
 }
 
 export interface Species {
   name: string;
   url: string;
+}
+
+export interface Sprites {
+  front_default: string;
+  other: {
+    'official-artwork': {
+      front_default: string;
+    };
+  };
 }
 
 export interface PokemonSpeciesData {
@@ -29,9 +44,4 @@ export interface Names {
     name: string;
     url: string;
   };
-}
-
-export interface AllPokemonData extends PokemonResults {
-  detailData: PokemonDetailData;
-  speciesData: PokemonSpeciesData;
 }

@@ -20,6 +20,12 @@ export const usePokemonDataStore = defineStore('pokemonDataStore', {
         .map(({ speciesData }) => speciesData.names.find(({ language }) => language.name === 'ja')?.name || '')
         .filter((name) => name !== '');
     },
+    getPokemonImageUrls(state) {
+      return state.allPokemonData.map(
+        ({ detailData }) =>
+          detailData.sprites.front_default || detailData.sprites.other['official-artwork'].front_default,
+      );
+    },
   },
   actions: {
     setLoading(loading: boolean) {
