@@ -2,7 +2,7 @@
 import { usePokemonDataStore } from '@/store/pokemonDataStore';
 
 const pokemonDataStore = usePokemonDataStore();
-const { loading: loadingState, getEnglishPokemonNames } = storeToRefs(pokemonDataStore);
+const { loading: loadingState, getJapanesePokemonNames } = storeToRefs(pokemonDataStore);
 const { updateAllPokemonData } = pokemonDataStore;
 
 await updateAllPokemonData();
@@ -11,7 +11,7 @@ await updateAllPokemonData();
 <template>
   <h1>ポケモン図鑑アプリ</h1>
   <ul class="grid grid-cols-4 gap-2 p-4">
-    <template v-for="name in getEnglishPokemonNames" :key="name">
+    <template v-for="name in getJapanesePokemonNames" :key="name">
       <li>
         <Card>
           <CardHeader>

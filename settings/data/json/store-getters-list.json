@@ -1,1 +1,10 @@
-["getCount", "getCount2", "getCount3", "getCount4", "getCount5", "getCount6", "getEnglishPokemonNames"]
+[
+  "getCount",
+  "getCount2",
+  "getCount3",
+  "getCount4",
+  "getCount5",
+  "getCount6",
+  "getEnglishPokemonNames",
+  "getJapanesePokemonNames"
+]

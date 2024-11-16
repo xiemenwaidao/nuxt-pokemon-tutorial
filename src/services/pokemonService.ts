@@ -1,7 +1,7 @@
-import type { PokemonData } from '@/types/pokemon';
+import type { AllPokemonData } from '@/types/pokemon';
 
 export const fetchPokemonData = async () => {
-  const { data } = await useFetch<PokemonData>('/api/all-pokemon');
+  const { data } = await useFetch<AllPokemonData[]>('/api/all-pokemon');
   if (!data.value) {
     throw new Error('No data found');
   }
