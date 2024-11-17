@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import DetailCard from './DetailCard.vue';
+
 const router = useRouter();
 
 const handleClickBackButton = () => {
@@ -6,7 +8,7 @@ const handleClickBackButton = () => {
 };
 </script>
 <template>
-  <h1>詳細ページ</h1>
+  <DetailCard />
   <div class="flex justify-center">
     <Button class="mt-4 bg-green-400 font-bold hover:bg-green-300" @click="handleClickBackButton">もどる</Button>
   </div>
