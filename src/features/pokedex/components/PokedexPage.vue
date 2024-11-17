@@ -5,7 +5,7 @@ import PokedexPagination from './PokedexPagination.vue';
 import PokemonCardList from './PokemonCardList.vue';
 
 const pokemonDataStore = usePokemonDataStore();
-const { getJapanesePokemonNames, getPokemonAllCount } = storeToRefs(pokemonDataStore);
+const { getJapanesePokemonNames, getEnglishPokemonNames, getPokemonAllCount } = storeToRefs(pokemonDataStore);
 const { updateAllPokemonData } = pokemonDataStore;
 
 const route = useRoute();
@@ -29,7 +29,7 @@ if (import.meta.server && page.value > maxPage.value && maxPage.value > 0) {
 <template>
   <ul class="grid grid-cols-4 gap-2 p-4">
     <template v-for="(name, index) in getJapanesePokemonNames" :key="`${index}-${name}`">
-      <PokemonCardList :name="name" :index="index" />
+      <PokemonCardList :name="name" :index="index" :name-id="getEnglishPokemonNames[index]" />
     </template>
   </ul>
   <PokedexPagination class="flex justify-center" :total-count="getPokemonAllCount" :current-page="page" />

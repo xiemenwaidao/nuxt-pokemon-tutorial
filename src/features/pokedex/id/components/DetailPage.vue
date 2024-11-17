@@ -1,11 +1,19 @@
 <script setup lang="ts">
 import DetailCard from './DetailCard.vue';
 
+const pokemonSpecificDataStore = usePokemonSpecificDataStore();
+const { updateSpecificPokemonData } = pokemonSpecificDataStore;
+
+const route = useRoute();
 const router = useRouter();
+
+const nameId = route.query.nameId as string;
 
 const handleClickBackButton = () => {
   router.back();
 };
+
+await updateSpecificPokemonData(nameId);
 </script>
 <template>
   <DetailCard />

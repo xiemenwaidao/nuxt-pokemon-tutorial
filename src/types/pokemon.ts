@@ -53,3 +53,12 @@ export interface Names {
     url: string;
   };
 }
+
+export interface PokemonDetailData {
+  height: number;
+  species: Species;
+  sprites: Sprites;
+  weight: number;
+}
+
+export type SpecificPokemonData = Omit<AllPokemonData, keyof PokemonResults>;

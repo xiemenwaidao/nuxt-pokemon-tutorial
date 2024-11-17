@@ -10,12 +10,13 @@ const { loading: loadingState, getPokemonImageUrls, getPokemonIds } = storeToRef
 
 defineProps<{
   name: string;
+  nameId: string;
   index: number;
 }>();
 </script>
 <template>
   <li>
-    <NuxtLink :to="`/pokedex/${getPokemonIds[index]}`">
+    <NuxtLink :to="`/pokedex/${getPokemonIds[index]}?nameId=${nameId}`">
       <Card class="h-hull">
         <template v-if="loadingState">
           <Skeleton class="h-[250px] w-full rounded-xl" />
