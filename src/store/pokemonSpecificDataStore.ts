@@ -15,6 +15,15 @@ export const usePokemonSpecificDataStore = defineStore('pokemonSpecificDataStore
       pokemon.value.detailData.sprites.other['official-artwork'].front_default ||
       pokemon.value.detailData.sprites.front_default,
   );
+  const getPokemonName = computed(
+    () => pokemon.value.speciesData.names.find(({ language }) => language.name === 'ja')?.name || '?',
+  );
+  const getGenera = computed(
+    () => pokemon.value.speciesData.genera.find(({ language }) => language.name === 'ja')?.genus,
+  );
+  const getFlavorText = computed(
+    () => pokemon.value.speciesData.flavor_text_entries.find(({ language }) => language.name === 'ja')?.flavor_text,
+  );
 
   // actions
   const setLoading = (isLoading: boolean) => {
@@ -45,5 +54,8 @@ export const usePokemonSpecificDataStore = defineStore('pokemonSpecificDataStore
     getWeight,
     getImage,
     updateSpecificPokemonData,
+    getPokemonName,
+    getGenera,
+    getFlavorText,
   };
 });

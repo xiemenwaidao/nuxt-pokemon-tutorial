@@ -42,7 +42,25 @@ export interface Sprites {
   };
 }
 
+export interface FlavorTextEntry {
+  flavor_text: string;
+  language: {
+    name: string;
+    url: string;
+  };
+}
+
+export interface Genera {
+  genus: string;
+  language: {
+    name: string;
+    url: string;
+  };
+}
+
 export interface PokemonSpeciesData {
+  flavor_text_entries: FlavorTextEntry[];
+  genera: Genera[];
   names: Names[];
 }
 
