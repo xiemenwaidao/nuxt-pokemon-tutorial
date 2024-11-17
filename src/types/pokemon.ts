@@ -1,3 +1,10 @@
+export interface Pokemon {
+  count: number;
+  next?: string;
+  previous?: string;
+  allPokemonData: AllPokemonData[];
+}
+
 export interface AllPokemonData extends PokemonResults {
   detailData: PokemonDetailData;
   speciesData: PokemonSpeciesData;

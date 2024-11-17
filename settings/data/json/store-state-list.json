@@ -1,1 +1,1 @@
-["title", "isFetching", "count", "allPokemonData", "loading"]
+["title", "isFetching", "count", "pokemonData", "loading", "errorMessage"]

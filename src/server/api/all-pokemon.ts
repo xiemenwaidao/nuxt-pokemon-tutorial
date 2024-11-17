@@ -1,11 +1,19 @@
 import type { AllPokemonData, PokemonData, PokemonDetailData, PokemonSpeciesData } from '@/types/pokemon';
 
-export default defineEventHandler(async () => {
+export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig();
+
+  // クエリパラメータから offset と limit を取得
+  const query = getQuery(event);
+  const offset = parseInt(query.offset as string, 10);
+  const limit = parseInt(query.limit as string, 10);
+
   try {
-    // 全体的なエラーハンドリング: ここでは、サーバーサイドの処理全体に対するエラーハンドリングを行います。
-    // 主な目的は、最終的なエラーメッセージのカスタマイズや、ステータスコードを設定することです。
-    const { results } = await fetchData<PokemonData>(config.POKE_API);
+    // APIリクエストに offset と limit をクエリパラメータとして渡す
+    const { results, count, next, previous } = await fetchData<PokemonData>(
+      `${config.POKE_API}?offset=${offset}&limit=${limit}`,
+    );
+
     const allPokemonData: AllPokemonData[] = await Promise.all(
       results.map(async (result) => {
         const detailData = await fetchData<PokemonDetailData>(result.url);
@@ -13,10 +21,8 @@ export default defineEventHandler(async () => {
         return { ...result, detailData, speciesData };
       }),
     );
-    return allPokemonData;
+    return { count, next, previous, allPokemonData };
   } catch (error) {
-    // ここでは、グローバルなエラーハンドリングとして、
-    // どのようなエラーが発生しても、統一されたエラーメッセージとステータスコードを返すようにします。
     handleError('Failed to fetch Pokémon data:', error);
     throw createError({ statusCode: 500, message: 'Failed to fetch Pokémon data' });
   }

@@ -1,11 +1,15 @@
-import type { AllPokemonData } from '@/types/pokemon';
+import type { Pokemon } from '@/types/pokemon';
 
-export const fetchPokemonData = async (): Promise<AllPokemonData[]> => {
-  const { data, error } = await useFetch<AllPokemonData[]>('/api/all-pokemon');
-
-  if (error.value || !data.value) {
-    return [];
+export const fetchPokemonData = async (offset: number, limit: number): Promise<Pokemon> => {
+  try {
+    // $fetchを使用してAPIからデータを取得
+    const data = await $fetch<Pokemon>('/api/all-pokemon', {
+      query: { offset, limit },
+    });
+    return data;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (error) {
+    // エラー時にはデフォルト値を返す
+    return { count: 0, allPokemonData: [] };
   }
-
-  return data.value;
 };
