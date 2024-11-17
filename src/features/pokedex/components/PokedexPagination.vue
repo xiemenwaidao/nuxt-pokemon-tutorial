@@ -10,6 +10,7 @@ import {
   PaginationNext,
   PaginationPrev,
 } from '@/components/ui/pagination';
+import { ITEMS_PER_PAGE } from '@/constants/pokedex';
 
 type PokedexPaginationProps = {
   totalCount: number;
@@ -19,7 +20,6 @@ type PokedexPaginationProps = {
 const props = defineProps<PokedexPaginationProps>();
 const { totalCount, currentPage } = toRefs(props);
 
-const ITEMS_PER_PAGE = 20;
 const totalPages = computed(() => Math.ceil(totalCount.value / ITEMS_PER_PAGE));
 
 const createPageUrl = (page: number) => `/pokedex?page=${page}`;
@@ -57,13 +57,16 @@ const handlePageClick = (page: number) => {
     navigateTo(createPageUrl(page));
   }
 };
+
+const isNextButtonDisabled = computed(() => totalPages.value === currentPage.value);
+const isPreviousButtonDisabled = computed(() => currentPage.value === 1);
 </script>
 
 <template>
   <Pagination :total="totalPages" :sibling-count="1" show-edges :default-page="currentPage">
     <PaginationList class="flex items-center gap-1 pt-4">
-      <PaginationFirst @click="handlePageClick(1)" />
-      <PaginationPrev @click="handlePageClick(currentPage - 1)" />
+      <PaginationFirst :disabled="isPreviousButtonDisabled" @click="handlePageClick(1)" />
+      <PaginationPrev :disabled="isPreviousButtonDisabled" @click="handlePageClick(currentPage - 1)" />
 
       <template v-for="(pageItem, index) in pagesToShow" :key="index">
         <PaginationListItem v-if="typeof pageItem === 'number'" :value="pageItem" as-child>
@@ -78,8 +81,8 @@ const handlePageClick = (page: number) => {
         <PaginationEllipsis v-else />
       </template>
 
-      <PaginationNext @click="handlePageClick(currentPage + 1)" />
-      <PaginationLast @click="handlePageClick(totalPages)" />
+      <PaginationNext :disabled="isNextButtonDisabled" @click="handlePageClick(currentPage + 1)" />
+      <PaginationLast :disabled="isNextButtonDisabled" @click="handlePageClick(totalPages)" />
     </PaginationList>
   </Pagination>
 </template>

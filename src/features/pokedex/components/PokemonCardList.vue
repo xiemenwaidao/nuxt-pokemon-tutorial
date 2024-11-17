@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import Spinner from '@/components/layout/Spinner.vue';
+import PokemonImage from '@/components/layout/PokemonImage.vue';
+// import Spinner from '@/components/layout/Spinner.vue';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
 import { usePokemonDataStore } from '@/store/pokemonDataStore';
 
 const pokemonDataStore = usePokemonDataStore();
@@ -13,13 +15,14 @@ defineProps<{
 </script>
 <template>
   <li>
-    <Card>
+    <Card class="h-full">
       <template v-if="loadingState">
-        <Spinner class="flex h-[250px] items-center justify-center" />
+        <Skeleton class="h-[250px] w-full rounded-xl" />
+        <!-- <Spinner class="flex h-[250px] items-center justify-center" /> -->
       </template>
       <template v-else>
         <CardHeader>
-          <img :src="getPokemonImageUrls[index]" :alt="`${name}の画像`" />
+          <PokemonImage :src="getPokemonImageUrls[index]" :alt="`${name}の画像`" />
         </CardHeader>
         <CardContent>
           <CardTitle class="text-center">{{ name }}</CardTitle>
