@@ -8,5 +8,6 @@
   "getEnglishPokemonNames",
   "getJapanesePokemonNames",
   "getPokemonImageUrls",
-  "getPokemonAllCount"
+  "getPokemonAllCount",
+  "getPokemonIds"
 ]

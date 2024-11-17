@@ -6,7 +6,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { usePokemonDataStore } from '@/store/pokemonDataStore';
 
 const pokemonDataStore = usePokemonDataStore();
-const { loading: loadingState, getPokemonImageUrls } = storeToRefs(pokemonDataStore);
+const { loading: loadingState, getPokemonImageUrls, getPokemonIds } = storeToRefs(pokemonDataStore);
 
 defineProps<{
   name: string;
@@ -15,19 +15,21 @@ defineProps<{
 </script>
 <template>
   <li>
-    <Card class="h-full">
-      <template v-if="loadingState">
-        <Skeleton class="h-[250px] w-full rounded-xl" />
-        <!-- <Spinner class="flex h-[250px] items-center justify-center" /> -->
-      </template>
-      <template v-else>
-        <CardHeader>
-          <PokemonImage :src="getPokemonImageUrls[index]" :alt="`${name}の画像`" />
-        </CardHeader>
-        <CardContent>
-          <CardTitle class="text-center">{{ name }}</CardTitle>
-        </CardContent>
-      </template>
-    </Card>
+    <NuxtLink :to="`/pokedex/${getPokemonIds[index]}`">
+      <Card class="h-hull">
+        <template v-if="loadingState">
+          <Skeleton class="h-[250px] w-full rounded-xl" />
+          <!-- <Spinner class="flex h-[250px] items-center justify-center" /> -->
+        </template>
+        <template v-else>
+          <CardHeader>
+            <PokemonImage :src="getPokemonImageUrls[index]" :alt="`${name}の画像`" />
+          </CardHeader>
+          <CardContent>
+            <CardTitle class="text-center">{{ name }}</CardTitle>
+          </CardContent>
+        </template>
+      </Card>
+    </NuxtLink>
   </li>
 </template>

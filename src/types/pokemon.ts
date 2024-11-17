@@ -23,6 +23,7 @@ export interface PokemonResults {
 }
 
 export interface PokemonDetailData {
+  id: number;
   species: Species;
   sprites: Sprites;
 }

@@ -35,6 +35,9 @@ export const usePokemonDataStore = defineStore('pokemonDataStore', {
     getPokemonAllCount({ pokemonData }): number {
       return pokemonData?.count ?? 0;
     },
+    getPokemonIds({ pokemonData }): number[] {
+      return pokemonData?.allPokemonData.map(({ detailData }) => detailData.id).filter((id) => !!id) ?? [];
+    },
   },
   actions: {
     setLoading(loading: boolean) {
