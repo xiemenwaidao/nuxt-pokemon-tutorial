@@ -44,18 +44,12 @@ export interface Sprites {
 
 export interface FlavorTextEntry {
   flavor_text: string;
-  language: {
-    name: string;
-    url: string;
-  };
+  language: Language;
 }
 
 export interface Genera {
   genus: string;
-  language: {
-    name: string;
-    url: string;
-  };
+  language: Language;
 }
 
 export interface PokemonSpeciesData {
@@ -66,10 +60,7 @@ export interface PokemonSpeciesData {
 
 export interface Names {
   name: string;
-  language: {
-    name: string;
-    url: string;
-  };
+  language: Language;
 }
 
 export interface PokemonDetailData {
@@ -86,3 +77,8 @@ export interface Cries {
 }
 
 export type SpecificPokemonData = Omit<AllPokemonData, keyof PokemonResults>;
+
+export interface Language {
+  name: string;
+  url: string;
+}

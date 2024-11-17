@@ -69,16 +69,21 @@ const isPreviousButtonDisabled = computed(() => currentPage.value === 1);
       <PaginationPrev :disabled="isPreviousButtonDisabled" @click="handlePageClick(currentPage - 1)" />
 
       <template v-for="(pageItem, index) in pagesToShow" :key="index">
-        <PaginationListItem v-if="typeof pageItem === 'number'" :value="pageItem" as-child>
-          <Button
-            class="h-10 w-10 p-0"
-            :variant="pageItem === currentPage ? 'default' : 'outline'"
-            @click="handlePageClick(pageItem)"
-          >
-            {{ pageItem }}
-          </Button>
-        </PaginationListItem>
-        <PaginationEllipsis v-else />
+        <template v-if="typeof pageItem === 'number'">
+          <PaginationListItem :value="pageItem" as-child>
+            <Button
+              class="h-10 w-10 p-0"
+              :class="{ 'bg-green-400 hover:bg-green-300': pageItem === currentPage }"
+              :variant="pageItem === currentPage ? 'default' : 'outline'"
+              @click="handlePageClick(pageItem)"
+            >
+              {{ pageItem }}
+            </Button>
+          </PaginationListItem>
+        </template>
+        <template v-else>
+          <PaginationEllipsis />
+        </template>
       </template>
 
       <PaginationNext :disabled="isNextButtonDisabled" @click="handlePageClick(currentPage + 1)" />
