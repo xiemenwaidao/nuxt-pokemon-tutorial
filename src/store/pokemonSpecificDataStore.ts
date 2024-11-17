@@ -24,6 +24,7 @@ export const usePokemonSpecificDataStore = defineStore('pokemonSpecificDataStore
   const getFlavorText = computed(
     () => pokemon.value.speciesData.flavor_text_entries.find(({ language }) => language.name === 'ja')?.flavor_text,
   );
+  const getCries = computed(() => pokemon.value.detailData.cries.latest || pokemon.value.detailData.cries.legacy);
 
   // actions
   const setLoading = (isLoading: boolean) => {
@@ -57,5 +58,6 @@ export const usePokemonSpecificDataStore = defineStore('pokemonSpecificDataStore
     getPokemonName,
     getGenera,
     getFlavorText,
+    getCries,
   };
 });

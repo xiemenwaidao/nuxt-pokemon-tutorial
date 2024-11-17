@@ -73,10 +73,16 @@ export interface Names {
 }
 
 export interface PokemonDetailData {
+  cries: Cries;
   height: number;
   species: Species;
   sprites: Sprites;
   weight: number;
+}
+
+export interface Cries {
+  latest: string;
+  legacy: string;
 }
 
 export type SpecificPokemonData = Omit<AllPokemonData, keyof PokemonResults>;

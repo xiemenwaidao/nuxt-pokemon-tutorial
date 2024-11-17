@@ -3,12 +3,21 @@ import PokemonImage from '@/components/layout/PokemonImage.vue';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { usePokemonSpecificDataStore } from '@/store/pokemonSpecificDataStore';
 
-const { getHeight, getWeight, getImage, getPokemonName, getGenera, getFlavorText } = usePokemonSpecificDataStore();
+const { getHeight, getWeight, getImage, getPokemonName, getGenera, getFlavorText, getCries } =
+  usePokemonSpecificDataStore();
+
+const handleClickAudioButton = () => {
+  const audio = new Audio(getCries);
+  audio.play();
+};
 </script>
 <template>
   <Card>
     <CardHeader class="flex flex-row justify-center">
       <CardTitle class="text-center text-3xl">{{ getPokemonName }}</CardTitle>
+      <Button :disabled="!getCries" class="ml-4 bg-green-400 hover:bg-green-300" @click="handleClickAudioButton">
+        <img src="@/assets/image/speaker-icon.svg" alt="鳴き声再生ボタン" />
+      </Button>
     </CardHeader>
     <CardContent class="flex items-center justify-center gap-8">
       <div class="flex w-2/5 justify-center">
